@@ -1,0 +1,153 @@
+\documentclass[11pt]{article}
+\pagestyle{myheadings}
+
+\usepackage{graphicx}
+\usepackage[german]{babel}
+%\usepackage{helvetic}
+\usepackage{a4wide}
+\usepackage{amssymb}
+\usepackage[clearempty]{titlesec}
+\usepackage[bf]{caption2} 
+\usepackage{hyperref}
+\usepackage{framed}
+
+\parskip3mm
+\parindent0mm
+
+\begin{document}
+%\vspace*{-1cm}
+  {\normalsize  
+Moritz August\hfill MPE, March 2017\\ 
+    \mbox{}\\ [2ex] }
+%\vspace*{-1.5cm}
+%\begin{center}
+%\parbox{16cm}{
+%  \includegraphics{../Bilder/logo.ps}
+%}
+%\end{center}
+
+%\maketitle \vspace{-8ex}
+%\vspace{-1.5cm}
+\thispagestyle{empty}
+\begin{center}
+    {\LARGE\sffamily\bfseries Git course - Tutorial}
+\end{center}
+
+
+\section*{Setting up git}
+This task is simply meant to let you set up everything to be able to use git. Although we suggest to use GitKraken, please feel free to use any other tool you might like.
+\begin{itemize}
+\item[\bf{a)}] Install git and, if you like, GitKraken.
+\item[\bf{b)}] Get yourself an account at bitbucket\footnote{\url{https://bitbucket.org}} or github\footnote{\url{https://github.com}} or some similar platform. Maybe you already have access to some GitLab server? Note that github does not offer private repositories for free accounts at the moment.
+\item[\bf{c)}] Create a new repository.  
+\item[\bf{d)}] Clone the repository to your machine.
+\begin{framed}
+\texttt{\$ git clone <user>@<url>:<repository>}
+\end{framed}
+\item[\bf{e)}] Copy things into your local version of the repository. Maybe you want to write a new paper soon? Maybe some code?
+\item[\bf{f)}] Create your first commit and push it.
+\begin{framed}
+\texttt{\$ git add *} \newline
+\texttt{\$ git commit -m 'my first commit'}
+\end{framed}
+\item[\bf{g)}] Open the repository with GitKraken. Familiarize yourself with the tool.
+\end{itemize}
+
+\section*{Branching and merging}
+Now, we will step through some easy branching and merging in the command line to get familiar with the respective commands. If you feel like it, you can simultaneously open the repository in GitKraken and after each step try to predict how the visualized graph will look.
+
+\begin{itemize}
+\item[\bf{a)}] Create a new local repository.
+\begin{framed}
+\texttt{\$ mkdir repo} \newline
+\texttt{\$ cd repo} \newline
+\texttt{\$ git init}
+\end{framed}
+\item[\bf{b)}] Create a file and check what git says about that with \texttt{git status}.
+\begin{framed}
+\texttt{\$ touch f0} \newline
+\texttt{\$ git status}
+\end{framed}
+\item[\bf{c)}] Add the file to the index and run \texttt{git status} again.
+\begin{framed}
+\texttt{\$ git add f0} \newline
+\texttt{\$ git status}
+\end{framed}
+\item[\bf{d)}] Now commit the index and check again what git wants to tell you.
+\begin{framed}
+\texttt{\$ git commit -m 'added f0'} \newline
+\texttt{\$ git status}
+\end{framed}
+\item[\bf{e)}] Create a new branch and, in the new branch, create a new file (with a different name than the last one). Commit your changes.
+\begin{framed}
+\texttt{\$ git checkout -b new\_branch} \newline
+\texttt{\$ touch f1} \newline
+\texttt{\$ git add f1} \newline
+\texttt{\$ git commit -m 'added f1 to new branch'}
+\end{framed}
+\item[\bf{f)}] Switch back to the master branch and create yet another file with a new name. Commit that as well.
+\begin{framed}
+\texttt{\$ git checkout master} \newline
+\texttt{\$ touch f2} \newline
+\texttt{\$ git add f2} \newline
+\texttt{\$ git commit -m 'added f2 to master branch'}
+\end{framed}
+\item[\bf{g)}] Take a look at the graph with \texttt{git log --graph --oneline --all}.
+\begin{framed}
+\texttt{\$ git log --graph --oneline --all}
+\end{framed}
+\item[\bf{h)}] Now merge the new branch into the master branch.
+\begin{framed}
+\texttt{\$ git merge new\_branch}
+\end{framed}
+\item[\bf{i)}] Print out the graph again and look at the files in the folder. Did that work out the way you thought?
+\begin{framed}
+\texttt{\$ git log --graph --oneline --all}
+\end{framed}
+\end{itemize}
+
+\section*{Resolving a merge conflict}
+For this exercise we will reuse the local repository we just created.
+
+\begin{itemize}
+\item[\bf{a)}] Switch to the master branch if you are not on it and create a new file. Write something into it and commit the changes.
+\begin{framed}
+\texttt{\$ git checkout master} \newline
+\texttt{\$ echo 'This is a file' >> f3} \newline
+\texttt{\$ git add f3} \newline
+\texttt{\$ git commit -m 'yet another file'}
+\end{framed}
+\item[\bf{b)}]  Switch to the other branch and create a file with the same name. Write something else into it. Commit that as well.
+\begin{framed}
+\texttt{\$ git checkout new\_branch} \newline
+\texttt{\$ echo 'same name. different conent.' >> f3} \newline
+\texttt{\$ git add f3} \newline
+\texttt{\$ git commit -m 'this surely will cause no problems'}
+\end{framed}
+\item[\bf{c)}] Now try to merge the master branch into the current branch. This should fail.
+\begin{framed}
+\texttt{\$ git merge master}
+\end{framed}
+\item[\bf{d)}] Take a look at the file causing the conflict. You should find the unresolved differences marked in the way explained in the lecture.
+\begin{framed}
+\texttt{\$ less f3}
+\end{framed}
+\item[\bf{e)}] Resolving this little conflict directly in the command line is easy. So, you can give it a try or take a look at how the situation looks like in GitKraken. It has an integrated merge tool that works similar to most other tools around and can come in handy when having to resolve larger conflicts. After you resolved the conflict, you can commit the changes.
+\begin{framed}
+\texttt{\$ vim f3} \newline
+\texttt{<delete part of the conflicting content>} \newline
+\texttt{\$ git add f3} \newline
+\texttt{\$ git commit -m 'resolved merge conflict'}
+\end{framed}
+\item[\bf{f)}] Suppose you are not happy with the result of you merge. Just reset the branch to its previous state with \texttt{git reset HEAD~ --hard}.
+\begin{framed}
+\texttt{\$ git reset HEAD$\sim$ --hard}
+\end{framed}
+\end{itemize}
+
+\section*{Website}
+The website with slides and tutorials can be found at\\
+\url{https://www5.in.tum.de/wiki/index.php/Python_/_Git_/_Bash_Course}.
+
+\end{document}
+
