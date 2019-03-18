@@ -45,7 +45,7 @@ HTML: https://github.com/severin617/IMPRS-course-2019.git \\
 SSH: git@github.com:severin617/IMPRS-course-2019.git
 \item Compile Latex files, etc.
 \end{itemize}
-\item[\bf{d)}] Create your own new repository (on github/gitlab/bitbucket).
+\item[\bf{d)}] Create your own new repository (remote on github/gitlab/bitbucket or local).
 \begin{itemize}
 \item Clone the repository to your machine.
 \item Copy things into your local version of the repository. Maybe you want to write a new paper soon? Maybe some code?
@@ -53,39 +53,29 @@ SSH: git@github.com:severin617/IMPRS-course-2019.git
 \end{itemize}
 \end{itemize}
 
-\section*{Branching and merging}
-Now, we will step through some easy branching and merging in the command line to get familiar with the respective commands. If you feel like it, you can simultaneously open the repository in GitKraken and after each step try to predict how the visualized graph will look.
-
+\section*{Optional: Branches}
+If you have code, latex or anything: Set a github repository for it. It's best to learn from own examples. If you decide to later get rid of it, "OK!", but you gave it a try!
+ 
+I don't know your background and how fast you are in grasping new things: In collaborative research projects, git branches are unavoidable.
 \begin{itemize}
-\item[\bf{a)}] Create a new local repository.
-\item[\bf{b)}] Create a file and check what git says about that with \texttt{git status}.
-\item[\bf{c)}] Add the file to the index and run \texttt{git status} again.
-\item[\bf{d)}] Now commit the index and check again what git wants to tell you.
-\item[\bf{e)}] Create a new branch and, in the new branch, create a new file (with a different name than the last one). Commit your changes.
-\item[\bf{f)}] Switch back to the master branch and create yet another file with a new name. Commit that as well.
-\item[\bf{g)}] Take a look at the graph with \texttt{git log --graph --oneline --all}.
-\item[\bf{h)}] Now merge the new branch into the master branch.
-\item[\bf{i)}] Print out the graph again and look at the files in the folder. Did that work out the way you thought?
+\item Make a local branch, for example in it@github.com:severin617/IMPRS-course-2019.git
+\begin{itemize}
+\item[] git checkout -b [branch-name (your name?)] \# creates a branch
+\item[] git branch \# shows what branch you're on 
+\end{itemize}
+\item Push the branch to github
+\begin{itemize}
+\item[] git push origin [branch-name (your name?)]
+\end{itemize}
+\item Check the github webpage to see if it worked!
 \end{itemize}
 
-\section*{Resolving a merge conflict}
-For this exercise we will reuse the local repository we just created.
 
-\begin{itemize}
-\item[\bf{a)}] Switch to the master branch and create a new file. Write something into it and commit the changes.
-\item[\bf{b)}]  Switch to the other branch and create a file with the same name. Write something else into it. Commit that as well.
-\item[\bf{c)}] Now try to merge the master branch into the current branch. This should fail.
-\item[\bf{d)}] Take a look at the file causing the conflict. You should find the unresolved differences marked in the way explained in the lecture.
-\item[\bf{e)}] Resolving this little conflict directly in the command line is easy. So, you can give it a try or take a look at how the situation looks like in GitKraken. It has an integrated merge tool that works similar to most other tools around and can come in handy when having to resolve larger conflicts. After you resolved the conflict, you can commit the changes.
-\item[\bf{f)}] Suppose you are not happy with the result of you merge. Just reset the branch to its previous state with \texttt{git reset HEAD~ --hard}.
-\end{itemize}
 
 \section*{Website}
 \label{sec:Website}
 The website with slides and tutorials can be found at\\
 \url{https://www5.in.tum.de/wiki/index.php/Python_/_Git_/_Bash_Course}.
-
-Please take two minutes to give us some feedback at \url{https://goo.gl/forms/psfz4sdyHEj5sI8T2}
 
 \end{document}
 

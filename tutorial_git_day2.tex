@@ -1,0 +1,64 @@
+\documentclass[11pt]{article}
+\pagestyle{myheadings}
+
+\usepackage{graphicx}
+\usepackage[german]{babel}
+%\usepackage{helvetic}
+\usepackage{a4wide}
+\usepackage{amssymb}
+\usepackage[clearempty]{titlesec}
+\usepackage[bf]{caption2} 
+\usepackage{hyperref}
+
+\parskip3mm
+\parindent0mm
+
+\begin{document}
+%\vspace*{-1cm}
+  {\normalsize  
+Severin Reiz\hfill MPE, March 2019\\ 
+    \mbox{}\\ [2ex] }
+%\vspace*{-1.5cm}
+%\begin{center}
+%\parbox{16cm}{
+%  \includegraphics{../Bilder/logo.ps}
+%}
+%\end{center}
+
+%\maketitle \vspace{-8ex}
+%\vspace{-1.5cm}
+\thispagestyle{empty}
+\begin{center}
+    {\LARGE\sffamily\bfseries Git course - Tutorial}
+\end{center}
+
+
+\section*{Branching and merging}
+Now, we will step through some easy branching and merging in the command line to get familiar with the respective commands. If you feel like it, you can simultaneously open the repository in GitKraken and after each step try to predict how the visualized graph will look.
+
+\begin{itemize}
+\item[\bf{a)}] Create a new local repository.
+\item[\bf{b)}] Create a file and check what git says about that with \texttt{git status}.
+\item[\bf{c)}] Add the file to the index and run \texttt{git status} again.
+\item[\bf{d)}] Now commit the index and check again what git wants to tell you.
+\item[\bf{e)}] Create a new branch and, in the new branch, create a new file (with a different name than the last one). Commit your changes.
+\item[\bf{f)}] Switch back to the master branch and create yet another file with a new name. Commit that as well.
+\item[\bf{g)}] Take a look at the graph with \texttt{git log --graph --oneline --all}.
+\item[\bf{h)}] Now merge the new branch into the master branch.
+\item[\bf{i)}] Print out the graph again and look at the files in the folder. Did that work out the way you thought?
+\end{itemize}
+
+\section*{Resolving a merge conflict}
+For this exercise we will reuse the local repository we just created.
+
+\begin{itemize}
+\item[\bf{a)}] Switch to the master branch and create a new file. Write something into it and commit the changes.
+\item[\bf{b)}]  Switch to the other branch and create a file with the same name. Write something else into it. Commit that as well.
+\item[\bf{c)}] Now try to merge the master branch into the current branch. This should fail.
+\item[\bf{d)}] Take a look at the file causing the conflict. You should find the unresolved differences marked in the way explained in the lecture.
+\item[\bf{e)}] Resolving this little conflict directly in the command line is easy. So, you can give it a try or take a look at how the situation looks like in GitKraken. It has an integrated merge tool that works similar to most other tools around and can come in handy when having to resolve larger conflicts. After you resolved the conflict, you can commit the changes.
+\item[\bf{f)}] Suppose you are not happy with the result of you merge. Just reset the branch to its previous state with \texttt{git reset HEAD~ --hard}.
+\end{itemize}
+
+
+\end{document}
